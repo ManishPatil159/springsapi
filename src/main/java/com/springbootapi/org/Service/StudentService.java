@@ -1,72 +1,63 @@
 package com.springbootapi.org.Service;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.springbootapi.org.Dao.IStudentDao;
 import com.springbootapi.org.Entity.Student;
+import com.springbootapi.org.Repository.IStudentRepo;
 
+/**
+ * @author Manish Patil
+ *
+ */
 @Service
 public class StudentService implements IStudentService {
-	@Autowired
-	@Qualifier("SampleData")
-	private IStudentDao studentDao;
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	@Autowired
+	private IStudentRepo studentRepo;
+
+	/* (non-Javadoc)
 	 * @see com.springbootapi.org.Service.IStudentService#getAllStudents()
 	 */
 	@Override
 	public List<Student> getAllStudents() {
-		return studentDao.getAllStudents();
+		List<Student> studentList = new ArrayList<>();
+		studentRepo.findAll().forEach(studentList::add);
+		return studentList;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see com.springbootapi.org.Service.IStudentService#getStudentById(int)
 	 */
 	@Override
 	public Student getStudentById(int id) {
-		return studentDao.getStudentById(id);
+		return studentRepo.findOne(id);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see com.springbootapi.org.Service.IStudentService#deleteStudent(int)
 	 */
 	@Override
 	public void deleteStudent(int id) {
-		studentDao.deleteStudent(id);
+		studentRepo.delete(id);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.springbootapi.org.Service.IStudentService#updateStudent(com.springbootapi
-	 * .org.Entity.Student)
+	/* (non-Javadoc)
+	 * @see com.springbootapi.org.Service.IStudentService#updateStudent(com.springbootapi.org.Entity.Student)
 	 */
 	@Override
 	public Student updateStudent(Student student) {
-		return studentDao.updateStudent(student);
+		return studentRepo.save(student);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.springbootapi.org.Service.IStudentService#insertStudent(com.springbootapi
-	 * .org.Entity.Student)
+	/* (non-Javadoc)
+	 * @see com.springbootapi.org.Service.IStudentService#insertStudent(com.springbootapi.org.Entity.Student)
 	 */
 	@Override
 	public void insertStudent(Student student) {
-		studentDao.insertStudent(student);
+		studentRepo.save(student);
 	}
 }
