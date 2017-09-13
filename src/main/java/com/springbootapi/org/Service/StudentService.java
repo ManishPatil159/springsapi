@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springbootapi.org.Entity.Student;
-import com.springbootapi.org.Repository.IStudentRepo;
+import com.springbootapi.org.Repository.StudentRepository;
 
 /**
  * @author Manish Patil
@@ -17,7 +17,7 @@ import com.springbootapi.org.Repository.IStudentRepo;
 public class StudentService implements IStudentService {
 
 	@Autowired
-	private IStudentRepo studentRepo;
+	private StudentRepository studentRepo;
 
 	/* (non-Javadoc)
 	 * @see com.springbootapi.org.Service.IStudentService#getAllStudents()
